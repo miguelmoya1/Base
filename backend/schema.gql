@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+input CreateRating {
+  raterID: String!
+  rating: Float!
+}
+
+input GoogleLogin {
+  accessToken: String!
+  email: String!
+  familyName: String!
+  givenName: String!
+  id: String!
+  idToken: String!
+  imageUrl: String!
+}
+
+type Location {
+  coordinates: [Float!]!
+  type: String!
+}
+
+input LocationInput {
+  coordinates: [Float!]!
+}
+
+type Mutation {
+  loginGoogle(user: GoogleLogin!): AuthResponse!
+  rateUser(rating: CreateRating!): Boolean!
+  rehydrate: String!
+  updateUser(user: UpdateUser!): Boolean!
+}
+
+type Query {
+  isLogged: Boolean!
+  isUniqueNickname(nickname: String!): Boolean!
+  loggedUser: User!
+  translate(language: String): Translate!
+  user(id: String!): User!
+  users(limit: Int!, offset: Int!): [User!]!
+}
+
+type Translate {
+  ambition: String
+  courage: String
+  determination: String
+  general: String
+  geolocationButton: String
+  geolocationDescription: String
+  geolocationTitle: String
+  honesty: String
+  imagination: String
+  independence: String
+  invalidToken: String
+  login: String
+  loyalty: String
+  maturity: String
+  nickname: String
+  nicknameMaxLength: String
+  nicknameMinLength: String
+  nicknameRequired: String
+  nicknameUnique: String
+  selfControl: String
+  straightforwardness: String
+  userNotFound: String
+  userSetUpButton: String
+  userSetUpDescription: String
+  userSetUpTitle: String
+}
+
+input UpdateUser {
+  location: LocationInput
+  name: String
+  nickname: String
+  surname: String
+}
+
+type User {
+  averageRating: Float
+  distance: Float!
+  email: String!
+  googleToken: String!
+  id: String!
+  imageUrl: String!
+  location: Location!
+  name: String!
+  nickname: String
+  surname: String!
+  totalRatings: Float!
+}

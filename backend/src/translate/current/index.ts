@@ -1,0 +1,32 @@
+export enum LanguagesAvailable {
+  es,
+  en,
+}
+
+export enum Current {
+  login,
+  invalidToken,
+  userNotFound,
+  geolocationTitle,
+  geolocationDescription,
+  geolocationButton,
+  userSetUpTitle,
+  userSetUpDescription,
+  userSetUpButton,
+  nickname,
+  nicknameRequired,
+  nicknameUnique,
+  nicknameMinLength,
+  nicknameMaxLength,
+  honesty,
+  straightforwardness,
+  determination,
+  imagination,
+  ambition,
+  courage,
+  maturity,
+  loyalty,
+  selfControl,
+  independence,
+  general,
+}
