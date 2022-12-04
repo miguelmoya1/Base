@@ -1,0 +1,20 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:backend": "cd backend && yarn",
+    "install:app": "cd app && yarn",
+    "install": "yarn install:backend && yarn install:app",
+    "start:backend": "cd backend && yarn start",
+    "start:app": "cd app && yarn start",
+    "start": "concurrently \"docker compose up\" \"yarn start:backend\" \"yarn start:app\"",
+    "prestart": "yarn install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

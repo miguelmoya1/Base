@@ -1,0 +1,21 @@
+version: '1'
+
+services:
+  database:
+    image: postgis/postgis
+    volumes:
+      - ./data/db:/var/lib/postgresql/base/data
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=base
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+

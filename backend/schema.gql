@@ -8,8 +8,16 @@ type AuthResponse {
 }
 
 input CreateRating {
-  raterID: String!
-  rating: Float!
+  ambition: Float!
+  courage: Float!
+  determination: Float!
+  honesty: Float!
+  imagination: Float!
+  independence: Float!
+  loyalty: Float!
+  maturity: Float!
+  selfControl: Float!
+  straightforwardness: Float!
 }
 
 input GoogleLogin {
