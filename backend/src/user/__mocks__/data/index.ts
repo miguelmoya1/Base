@@ -1,6 +1,4 @@
-import { User } from '../../entities/user.entity';
-
-export const userData = (): User => ({
+export const userData = () => ({
   id: '1',
   email: 'mail@gmail.com',
   location: {

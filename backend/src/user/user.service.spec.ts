@@ -55,14 +55,10 @@ describe('UserService', () => {
       it('should return a User', () => {
         expect(users[0]).toBeInstanceOf(Object);
       });
-
-      it('should return an array of users', async () => {
-        expect(users).toEqual([userData()]);
-      });
     });
 
-    describe('when called with an invalid data', () => {
-      it('should throw an error', async () => {
+    describe('when called incorrectly', () => {
+      it('should throw an error when the request user not found', async () => {
         await expect(service.findAll(null, null)).rejects.toThrowError(translateService.current.userNotFound);
       });
     });
@@ -87,9 +83,57 @@ describe('UserService', () => {
       it('should return a User', () => {
         expect(user).toBeInstanceOf(Object);
       });
+    });
 
-      it('should return a user', async () => {
-        expect(user).toEqual(userData());
+    describe('when called incorrectly', () => {
+      it('should throw an error when the request user not found', async () => {
+        await expect(service.findOne(null, null)).rejects.toThrowError(translateService.current.userNotFound);
+      });
+
+      it('should throw an error when the requested user not found', async () => {
+        await expect(service.findOne(userData().id, null)).rejects.toThrowError(translateService.current.userNotFound);
+      });
+    });
+  });
+
+  describe('isUniqueNickname', () => {
+    it('should be defined', () => {
+      expect(service.isUniqueNickname).toBeDefined();
+    });
+
+    describe('when called correctly', () => {
+      let isUnique: boolean;
+
+      beforeEach(async () => {
+        isUnique = await service.isUniqueNickname(userData().nickname);
+      });
+
+      it('should return false', () => {
+        expect(isUnique).toBeFalsy();
+      });
+    });
+  });
+
+  describe('update', () => {
+    it('should be defined', () => {
+      expect(service.update).toBeDefined();
+    });
+
+    describe('when called correctly', () => {
+      let isUpdated: boolean;
+
+      beforeEach(async () => {
+        isUpdated = await service.update(userData().id, { ...userData() });
+      });
+
+      it('should return true', () => {
+        expect(isUpdated).toBeTruthy();
+      });
+    });
+
+    describe('when called incorrectly', () => {
+      it('should throw an error when the request user not found', async () => {
+        await expect(service.update(null, userData())).rejects.toThrowError(translateService.current.userNotFound);
       });
     });
   });
