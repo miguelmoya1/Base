@@ -27,12 +27,6 @@ export class User {
   @Field({})
   googleToken: string;
 
-  @Field({ nullable: true })
-  averageRating: number | null;
-
-  @Field({})
-  totalRatings: number;
-
   @Field({})
   distance: number;
 }

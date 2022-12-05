@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "install:backend": "cd backend && yarn",
-    "install:app": "cd app && yarn",
-    "install": "yarn install:backend && yarn install:app",
+    "install": "yarn install:backend",
     "start:backend": "cd backend && yarn start",
     "start:app": "cd app && yarn start",
-    "start": "concurrently \"docker compose up\" \"yarn start:backend\" \"yarn start:app\"",
+    "start": "concurrently \"docker compose up\" \"yarn start:backend\"",
     "prestart": "yarn install"
   },
   "author": "",

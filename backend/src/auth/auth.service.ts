@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { OAuth2Client } from 'google-auth-library';
 import { TranslateService } from '../translate/translate.service';
 import { User } from '../user/entities/user.entity';
-import { UserModel } from '../user/models/user.model';
+import { UserModel } from '../user/user.model';
 import { GoogleLogin } from './entities/google.entity';
 
 @Injectable()
@@ -12,11 +12,7 @@ export class AuthService implements OnModuleInit {
   private logger = new Logger(AuthService.name);
   client: OAuth2Client;
 
-  constructor(
-    @InjectModel(UserModel) private userModel: typeof UserModel,
-    private translateService: TranslateService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(@InjectModel(UserModel) private userModel: typeof UserModel, private translateService: TranslateService, private jwtService: JwtService) {}
 
   async onModuleInit() {
     this.logger.debug('Init');

@@ -2,14 +2,17 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModuleBuilder } from '@nestjs/testing';
 import { TranslateModuleSpec } from '../translate/translate.module.spec';
-import { UserModuleSpec } from '../user/user.module.spec';
+import { UserService } from '../user/user.service';
+import { UserModelMock } from '../user/__mocks__/user.model';
 import { GqlAuthGuard, JwtAuthGuard } from './auth.guard';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 
+jest.mock('../user/user.service');
+
 @Module({
-  imports: [TranslateModuleSpec, UserModuleSpec, JwtModule.register({ secret: 'secret' })],
-  providers: [AuthService, AuthResolver, GqlAuthGuard, JwtAuthGuard],
+  imports: [TranslateModuleSpec, JwtModule.register({ secret: 'secret' })],
+  providers: [AuthService, AuthResolver, GqlAuthGuard, JwtAuthGuard, UserService, UserModelMock],
   exports: [AuthService],
 })
 export class AuthModuleSpec {}

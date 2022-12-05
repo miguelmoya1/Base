@@ -4,14 +4,12 @@ import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { FindOptions, WhereAttributeHashValue } from 'sequelize/types';
 import { Location } from '../geometry/entities/location.entity';
-import { GeometryService } from '../geometry/geometry.service';
-import { CreateRating } from '../rating/dto/create-rating.input';
-import { RatingModel } from '../rating/models/rating.model';
+// import { GeometryService } from '../geometry/geometry.service';
 import { PaginatorInput } from '../shared/dto/paginator.input';
 import { TranslateService } from '../translate/translate.service';
 import { UpdateUser } from './dto/update-user.input';
 import { User } from './entities/user.entity';
-import { UserModel } from './models/user.model';
+import { UserModel } from './user.model';
 
 const { where, col, fn } = Sequelize;
 
@@ -21,9 +19,7 @@ export class UserService implements OnModuleInit {
 
   constructor(
     @InjectModel(UserModel) private readonly userModel: typeof UserModel,
-    @InjectModel(RatingModel) private readonly ratingModel: typeof RatingModel,
-    private readonly translateService: TranslateService,
-    private readonly geometryService: GeometryService,
+    private readonly translateService: TranslateService, // private readonly geometryService: GeometryService,
   ) {}
 
   async onModuleInit() {
@@ -61,31 +57,6 @@ export class UserService implements OnModuleInit {
     }
   }
 
-  async rate(userID: User['id'], rating: CreateRating) {
-    const user = await this.userModel.findByPk(userID);
-
-    if (!user) {
-      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
-    }
-
-    await user.createRating({ ...rating });
-
-    return true;
-  }
-
-  async isUniqueNickname(nickname: User['nickname']) {
-    const total = await this.userModel.count({
-      where: {
-        nickname: where(
-          fn('TRIM', fn('LOWER', col('nickname'))),
-          nickname.toLowerCase().trim(),
-        ) as WhereAttributeHashValue<string>,
-      },
-    });
-
-    return total === 0;
-  }
-
   async findAll(paginator: PaginatorInput, userID: User['id']) {
     const currentUser = await this.userModel.findByPk(userID);
 
@@ -107,24 +78,36 @@ export class UserService implements OnModuleInit {
 
     if (!currentUser) {
       this.logger.verbose(`User with id ${userID} not found (current)`);
-      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
-    const user = await this.userModel.findByPk(id, { ...this.getInclude(currentUser.location) });
+    const user = await this.userModel.findByPk(id, {
+      ...this.getInclude(currentUser.location),
+    });
 
     if (!user) {
       this.logger.verbose(`User with id ${id} not found`);
-      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
     return user;
+  }
+
+  async isUniqueNickname(nickname: User['nickname']) {
+    const total = await this.userModel.count({
+      where: {
+        nickname: where(fn('TRIM', fn('LOWER', col('nickname'))), nickname.toLowerCase().trim()) as WhereAttributeHashValue<string>,
+      },
+    });
+
+    return total === 0;
   }
 
   async update(id: User['id'], updateUser: UpdateUser) {
     const user = await this.userModel.findByPk(id);
 
     if (!user) {
-      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
     const { location, ...userToUpdate } = updateUser;
@@ -140,24 +123,11 @@ export class UserService implements OnModuleInit {
 
   private getInclude(location: Location) {
     const include: FindOptions<UserModel> = {
-      attributes: {
-        include: [
-          [this.geometryService.getDistance(location), 'distance'],
-          [Sequelize.fn('AVG', Sequelize.col('Ratings.rating')), 'averageRating'],
-          [Sequelize.fn('COUNT', Sequelize.col('Ratings.rating')), 'totalRatings'],
-        ],
-      },
-      include: [
-        {
-          model: this.ratingModel,
-          as: 'Ratings',
-          attributes: [],
-          required: false,
-          duplicating: false, // ! IMPORTANT
-        },
-      ],
-      order: [this.geometryService.getDistance(location)],
-      group: ['UserModel.id'],
+      // attributes: {
+      // include: [[this.geometryService.getDistance(location), 'distance']],
+      // },
+
+      // order: [this.geometryService.getDistance(location)],
       raw: true,
     };
 

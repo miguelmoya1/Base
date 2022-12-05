@@ -132,11 +132,10 @@ export class TranslateService implements OnModuleInit {
     const defaultValues = this.getDefaultValues();
     const defaultKeys = Object.keys(defaultValues).sort();
     const lines = defaultKeys.map((key) => '  @Field({ nullable: true })\n  ####: string;\n\n'.replace(/####/g, key));
-    const file =
-      `import { Field, ObjectType } from '@nestjs/graphql';\n\n@ObjectType({})\nexport class Translate {\n####}\n`.replace(
-        /####/g,
-        lines.join('').substring(0, lines.join('').length - 1), // Remove last endline
-      );
+    const file = `import { Field, ObjectType } from '@nestjs/graphql';\n\n@ObjectType({})\nexport class Translate {\n####}\n`.replace(
+      /####/g,
+      lines.join('').substring(0, lines.join('').length - 1), // Remove last endline
+    );
 
     const gqlFile = await readFile(dir, 'utf8');
 
