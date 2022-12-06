@@ -6,7 +6,7 @@ import { Location } from './entities/location.entity';
 export class GeometryService {
   /**
    * @example attributes: [[this.geometryService.getDistance(pos), 'distance']],
-              order: [this.geometryService.getDistance(pos)],
+   * order: [this.geometryService.getDistance(pos)],
    */
   public getDistance(location: Location, column = 'location') {
     return Sequelize.fn(
