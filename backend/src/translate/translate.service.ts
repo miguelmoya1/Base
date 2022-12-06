@@ -36,7 +36,7 @@ export class TranslateService implements OnModuleInit {
     if (language) {
       return this.languages[language] || this.languages.en;
     }
-    let lang = [...new Set(req.headers['accept-language']?.split(','))]?.[0]?.substring(0, 2);
+    let lang = [...new Set(req?.headers['accept-language']?.split(','))]?.[0]?.substring(0, 2);
 
     if (!this.languages[lang]) {
       lang = 'en';
@@ -146,7 +146,7 @@ export class TranslateService implements OnModuleInit {
 
   private async exists(path: string) {
     try {
-      return await stat(path);
+      return !!(await stat(path));
     } catch (err) {
       return false;
     }

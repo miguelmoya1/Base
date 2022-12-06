@@ -8,7 +8,7 @@ export class TranslateController {
   constructor(private readonly translateService: TranslateService) {}
 
   @Get()
-  async getTranslate(@Req() request?: Request, @Body('language') language?: string) {
+  async translate(@Req() request?: Request, @Body('language') language?: string) {
     this.logger.debug('getTranslate');
     return this.translateService.getTranslate(request, language);
   }

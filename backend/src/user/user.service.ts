@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { FindOptions, WhereAttributeHashValue } from 'sequelize/types';
 import { Location } from '../geometry/entities/location.entity';
+import { GeometryService } from '../geometry/geometry.service';
 // import { GeometryService } from '../geometry/geometry.service';
 import { PaginatorInput } from '../shared/dto/paginator.input';
 import { TranslateService } from '../translate/translate.service';
@@ -19,7 +20,8 @@ export class UserService implements OnModuleInit {
 
   constructor(
     @InjectModel(UserModel) private readonly userModel: typeof UserModel,
-    private readonly translateService: TranslateService, // private readonly geometryService: GeometryService,
+    private readonly translateService: TranslateService,
+    private readonly geometryService: GeometryService,
   ) {}
 
   async onModuleInit() {
@@ -123,11 +125,11 @@ export class UserService implements OnModuleInit {
 
   private getInclude(location: Location) {
     const include: FindOptions<UserModel> = {
-      // attributes: {
-      // include: [[this.geometryService.getDistance(location), 'distance']],
-      // },
+      attributes: {
+        include: [[this.geometryService.getDistance(location), 'distance']],
+      },
 
-      // order: [this.geometryService.getDistance(location)],
+      order: [this.geometryService.getDistance(location)],
       raw: true,
     };
 

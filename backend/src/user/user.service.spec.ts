@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { GeometryService } from '../geometry/geometry.service';
 import { TranslateService } from '../translate/translate.service';
 import { UserModel } from './user.model';
 import { UserService } from './user.service';
@@ -6,6 +7,7 @@ import { userData } from './__mocks__/data';
 import { UserModelMock } from './__mocks__/user.model';
 
 jest.mock('../translate/translate.service');
+jest.mock('../geometry/geometry.service');
 
 describe('UserService', () => {
   let service: UserService;
@@ -13,7 +15,7 @@ describe('UserService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TranslateService, UserService, UserModelMock],
+      providers: [TranslateService, GeometryService, UserService, UserModelMock],
     }).compile();
 
     service = module.get<UserService>(UserService);
