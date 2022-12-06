@@ -6,18 +6,13 @@ import { urlencoded } from 'express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({ bodyLimit: 52_428_800 }),
-    { cors: true },
-  );
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ bodyLimit: 52_428_800 }), { cors: true });
 
   app.use(urlencoded({ limit: process.env.MAX_SIZE_JSON, extended: true }));
 
   const configService = app.get(ConfigService);
   const environment = configService.get('NODE_ENV');
-  const logLevels: LogLevel[] =
-    environment === 'development' ? ['debug', 'error', 'warn', 'log', 'verbose'] : ['error'];
+  const logLevels: LogLevel[] = environment === 'development' ? ['debug', 'error', 'warn', 'log', 'verbose'] : ['error'];
 
   app.useLogger(logLevels);
 

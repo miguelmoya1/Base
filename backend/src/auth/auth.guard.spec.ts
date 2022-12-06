@@ -1,18 +1,19 @@
 import { Test } from '@nestjs/testing';
 import { GqlAuthGuard, JwtAuthGuard } from './auth.guard';
-import { AuthModuleSpec } from './auth.module.spec';
 
-describe('Auth Guard', () => {
+describe('AuthGuard', () => {
   let gqlAuthGuard: GqlAuthGuard;
   let jwtAuthGuard: JwtAuthGuard;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [AuthModuleSpec],
+      providers: [GqlAuthGuard, JwtAuthGuard],
     }).compile();
 
     gqlAuthGuard = module.get(GqlAuthGuard);
     jwtAuthGuard = module.get(JwtAuthGuard);
+
+    jest.clearAllMocks();
   });
 
   describe('GqlAuthGuard', () => {

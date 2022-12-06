@@ -1,6 +1,8 @@
+import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import { TranslateService } from '../translate/translate.service';
-import { AuthModuleSpec } from './auth.module.spec';
+import { UserService } from '../user/user.service';
+import { UserModelMock } from '../user/__mocks__/user.model';
 import { AuthService } from './auth.service';
 
 const signValues = {
@@ -8,18 +10,23 @@ const signValues = {
   email: 'email',
 };
 
+jest.mock('../translate/translate.service');
+jest.mock('../user/user.service');
+
 describe('Auth Service', () => {
   let service: AuthService;
   let translateService: TranslateService;
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [AuthModuleSpec],
+      imports: [JwtModule.register({ secret: 'secret' })],
+      providers: [AuthService, TranslateService, UserService, UserModelMock],
     }).compile();
 
     service = module.get(AuthService);
     translateService = module.get(TranslateService);
-    await translateService.onModuleInit();
+
+    jest.clearAllMocks();
   });
 
   it('Should be defined', () => {

@@ -6,7 +6,6 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { GeometryModule } from './geometry/geometry.module';
-import { RatingModule } from './rating/rating.module';
 import { TranslateModule } from './translate/translate.module';
 import { UserModule } from './user/user.module';
 
@@ -43,7 +42,6 @@ import { UserModule } from './user/user.module';
     TranslateModule,
     AuthModule,
     UserModule,
-    RatingModule,
     GeometryModule,
   ],
 })
