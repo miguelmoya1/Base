@@ -78,7 +78,7 @@ export class UserService implements OnModuleInit {
 
     if (!currentUser) {
       this.logger.verbose(`User with id ${userID} not found (current)`);
-      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
     const user = await this.userModel.findByPk(id, {
@@ -87,7 +87,7 @@ export class UserService implements OnModuleInit {
 
     if (!user) {
       this.logger.verbose(`User with id ${id} not found`);
-      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
     return user;
@@ -107,7 +107,7 @@ export class UserService implements OnModuleInit {
     const user = await this.userModel.findByPk(id);
 
     if (!user) {
-      // throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
+      throw new HttpException(this.translateService.current.userNotFound, HttpStatus.NOT_FOUND);
     }
 
     const { location, ...userToUpdate } = updateUser;

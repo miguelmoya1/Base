@@ -22,13 +22,13 @@ jobs:
       - name: Run tests
         run: cd backend && yarn test
 
-  test-app:
-    name: 😨 Test app
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚚 Get yarn and tools
-        uses: actions/checkout@v2
-      - name: Install
-        run: cd app && yarn install --silent
-      - name: Run tests
-        run: cd app && yarn test:prod
+  # test-app:
+  #   name: 😨 Test app
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 🚚 Get yarn and tools
+  #       uses: actions/checkout@v2
+  #     - name: Install
+  #       run: cd app && yarn install --silent
+  #     - name: Run tests
+  #       run: cd app && yarn test:prod
