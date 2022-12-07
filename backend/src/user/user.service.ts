@@ -8,7 +8,7 @@ import { GeometryService } from '../geometry/geometry.service';
 // import { GeometryService } from '../geometry/geometry.service';
 import { PaginatorInput } from '../shared/dto/paginator.input';
 import { TranslateService } from '../translate/translate.service';
-import { UpdateUser } from './dto/update-user.input';
+import { UpdateUser } from './dto/update.input';
 import { User } from './entities/user.entity';
 import { UserModel } from './user.model';
 

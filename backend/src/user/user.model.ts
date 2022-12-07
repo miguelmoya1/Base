@@ -1,7 +1,7 @@
 import { GEOGRAPHY, STRING, TEXT, UUID, UUIDV4 } from 'sequelize';
 import { Column, Model, Table } from 'sequelize-typescript';
 import { LocationInput } from '../geometry/dto/location.input';
-import { CreateUser } from './dto/create-user.input';
+import { CreateUser } from './dto/create.input';
 import { User } from './entities/user.entity';
 
 @Table({

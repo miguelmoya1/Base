@@ -30,7 +30,7 @@ import { UserModule } from './user/user.module';
       //   if (originalError instanceof HttpException) {
       //     const statusCode = originalError.getStatus();
       //     return {
-      //       statusCode: statusCode >= 400 && statusCode < 600 ? statusCode : 500,
+      //       statusCode,
       //       response: execution,
       //     };
       //   }

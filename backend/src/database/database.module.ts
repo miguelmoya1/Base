@@ -24,7 +24,7 @@ import { DatabaseService } from './database.service';
         },
         autoLoadModels: true,
         synchronize: true,
-        sync: { force: false && configService.get('NODE_ENV') === 'development' },
+        sync: { force: true && configService.get('NODE_ENV') === 'development' },
         ssl: configService.get('NODE_ENV') !== 'development',
         pool: {
           max: 20,

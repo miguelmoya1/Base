@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from '../auth/auth.guard';
 import { PaginatorInput } from '../shared/dto/paginator.input';
-import { UpdateUser } from './dto/update-user.input';
+import { UpdateUser } from './dto/update.input';
 import { User } from './entities/user.entity';
 import { GQLCurrentUser } from './user.decorator';
 import { UserService } from './user.service';

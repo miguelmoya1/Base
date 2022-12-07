@@ -6,7 +6,7 @@ import { Sequelize } from 'sequelize-typescript';
 @Injectable()
 export class DatabaseService implements OnModuleInit {
   private logger = new Logger(DatabaseService.name);
-  constructor(private sequelize: Sequelize, private configService: ConfigService) {}
+  constructor(private readonly sequelize: Sequelize, private readonly configService: ConfigService) {}
 
   async onModuleInit() {
     this.logger.debug('Init');
