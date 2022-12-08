@@ -31,30 +31,5 @@ describe('UserDecorator', () => {
     it('should return a function', () => {
       expect(typeof JWTCurrentUser()).toBe('function');
     });
-
-    // describe('call factory', () => {
-    //   let factory: any;
-    //   const mockUser = {
-    //     id: 1,
-    //   };
-
-    // beforeEach(() => {
-    //   factory = getParamDecoratorFactory({ decorator: JWTCurrentUser });
-    //   jest.spyOn(factory, 'call').mockImplementation(() => mockUser);
-    //   jest.resetAllMocks();
-    // });
-
-    // it('should call factory', () => {
-    //   factory(null, { user: mockUser });
-
-    //   expect(factory.call).toHaveBeenCalled();
-    // });
-
-    // it('should return user', () => {
-    //   const result = factory(null, { user: mockUser });
-
-    //   expect(result).toBe(mockUser);
-    // });
-    // });
   });
 });

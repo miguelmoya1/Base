@@ -12,7 +12,11 @@ export class AuthService implements OnModuleInit {
   private logger = new Logger(AuthService.name);
   client: OAuth2Client;
 
-  constructor(@InjectModel(UserModel) private userModel: typeof UserModel, private translateService: TranslateService, private jwtService: JwtService) {}
+  constructor(
+    @InjectModel(UserModel) private readonly userModel: typeof UserModel,
+    private readonly translateService: TranslateService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async onModuleInit() {
     this.logger.debug('Init');

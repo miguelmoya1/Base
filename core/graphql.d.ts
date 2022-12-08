@@ -8,19 +8,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export interface CreateRating {
-    ambition: number;
-    courage: number;
-    determination: number;
-    honesty: number;
-    imagination: number;
-    independence: number;
-    loyalty: number;
-    maturity: number;
-    selfControl: number;
-    straightforwardness: number;
-}
-
 export interface GoogleLogin {
     accessToken: string;
     email: string;
@@ -54,7 +41,6 @@ export interface Location {
 
 export interface IMutation {
     loginGoogle(user: GoogleLogin): AuthResponse | Promise<AuthResponse>;
-    rateUser(rating: CreateRating): boolean | Promise<boolean>;
     rehydrate(): string | Promise<string>;
     updateUser(user: UpdateUser): boolean | Promise<boolean>;
 }
@@ -97,7 +83,6 @@ export interface Translate {
 }
 
 export interface User {
-    averageRating?: Nullable<number>;
     distance: number;
     email: string;
     googleToken: string;
@@ -107,7 +92,6 @@ export interface User {
     name: string;
     nickname?: Nullable<string>;
     surname: string;
-    totalRatings: number;
 }
 
 type Nullable<T> = T | null;

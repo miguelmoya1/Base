@@ -7,19 +7,6 @@ type AuthResponse {
   user: User!
 }
 
-input CreateRating {
-  ambition: Float!
-  courage: Float!
-  determination: Float!
-  honesty: Float!
-  imagination: Float!
-  independence: Float!
-  loyalty: Float!
-  maturity: Float!
-  selfControl: Float!
-  straightforwardness: Float!
-}
-
 input GoogleLogin {
   accessToken: String!
   email: String!
@@ -41,7 +28,6 @@ input LocationInput {
 
 type Mutation {
   loginGoogle(user: GoogleLogin!): AuthResponse!
-  rateUser(rating: CreateRating!): Boolean!
   rehydrate: String!
   updateUser(user: UpdateUser!): Boolean!
 }
@@ -91,7 +77,6 @@ input UpdateUser {
 }
 
 type User {
-  averageRating: Float
   distance: Float!
   email: String!
   googleToken: String!
@@ -101,5 +86,4 @@ type User {
   name: String!
   nickname: String
   surname: String!
-  totalRatings: Float!
 }
