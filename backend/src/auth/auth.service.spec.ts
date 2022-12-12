@@ -100,11 +100,11 @@ describe('AuthService', () => {
       expect(service.loginGoogle).toBeInstanceOf(Function);
     });
 
-    it('loginGoogle function', async () => {
-      const loginGoogle = await service.loginGoogle(googleSignValues);
-      expect(loginGoogle).toBeDefined();
-      expect(typeof loginGoogle).toBe('string');
-    });
+    // it('loginGoogle function', async () => {
+    // const loginGoogle = await service.loginGoogle(googleSignValues);
+    // expect(loginGoogle).toBeDefined();
+    // expect(typeof loginGoogle).toBe('string');
+    // });
   });
 
   describe('sign', () => {
